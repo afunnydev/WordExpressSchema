@@ -1,10 +1,27 @@
+'use strict';
 
-import getPostThumbnail from './getPostThumbnail'
-import getThumbnails from './getThumbnails'
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-export default function ({Post, Postmeta, Terms, TermRelationships}, settings) {
+exports.default = function (_ref, settings) {
+  var Post = _ref.Post,
+      Postmeta = _ref.Postmeta,
+      Terms = _ref.Terms,
+      TermRelationships = _ref.TermRelationships;
+
   return {
-    getPostThumbnail: getPostThumbnail(Postmeta, Post, settings),
-    getThumbnails: getThumbnails(Postmeta, Post, settings)
-  }
-}
+    getPostThumbnail: (0, _getPostThumbnail2.default)(Postmeta, Post, settings),
+    getThumbnails: (0, _getThumbnails2.default)(Postmeta, Post, settings)
+  };
+};
+
+var _getPostThumbnail = require('./getPostThumbnail');
+
+var _getPostThumbnail2 = _interopRequireDefault(_getPostThumbnail);
+
+var _getThumbnails = require('./getThumbnails');
+
+var _getThumbnails2 = _interopRequireDefault(_getThumbnails);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

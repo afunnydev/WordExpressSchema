@@ -1,16 +1,10 @@
-const Thumbnail = `
-  type Thumbnail {
-    id: Int
-    src: String
-    sizes: [ThumbnailSize]
-  }
-`
+"use strict";
 
-const Size = `
-  type ThumbnailSize {
-    size: String,
-    file: String
-  }
-`
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Thumbnail = "\n  type Thumbnail {\n    id: Int\n    src: String\n    sizes: [ThumbnailSize]\n  }\n";
 
-export default [Thumbnail, Size]
+var Size = "\n  type ThumbnailSize {\n    size: String,\n    file: String\n  }\n";
+
+exports.default = [Thumbnail, Size];

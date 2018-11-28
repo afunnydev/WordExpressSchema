@@ -1,81 +1,107 @@
-export default function WordExpressResolvers(Connectors, publicSettings) {
-  const Resolvers = {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.default = WordExpressResolvers;
+function WordExpressResolvers(Connectors, publicSettings) {
+  var Resolvers = {
     Query: {
-      settings() {
-        return publicSettings
+      settings: function settings() {
+        return publicSettings;
       },
-      category(_, { term_id, name }) {
-        return Connectors.getTerm(term_id, name)
-      }, 
-      posts(_, args) {
-        return Connectors.getPosts(args)
+      category: function category(_, _ref) {
+        var term_id = _ref.term_id,
+            name = _ref.name;
+
+        return Connectors.getTerm(term_id, name);
       },
-      post(_, {name, id}) {
-        return Connectors.getPost(id, name)
-      }, 
-      postmeta(_, {post_id, keys}) {
-        return Connectors.getPostmeta(post_id, keys)
+      posts: function posts(_, args) {
+        return Connectors.getPosts(args);
       },
-      menus(_, {name}) {
-        return Connectors.getMenu(name)
+      post: function post(_, _ref2) {
+        var name = _ref2.name,
+            id = _ref2.id;
+
+        return Connectors.getPost(id, name);
       },
-      user(_, {id, name}) {
-        return Connectors.getUser({id, name})
+      postmeta: function postmeta(_, _ref3) {
+        var post_id = _ref3.post_id,
+            keys = _ref3.keys;
+
+        return Connectors.getPostmeta(post_id, keys);
       },
-      attachments(_, {ids}) {
-        return Connectors.getThumbnails(ids)
+      menus: function menus(_, _ref4) {
+        var name = _ref4.name;
+
+        return Connectors.getMenu(name);
+      },
+      user: function user(_, _ref5) {
+        // Added email field - AKIA
+        var id = _ref5.id,
+            name = _ref5.name,
+            email = _ref5.email;
+
+        return Connectors.getUser({ id: id, name: name, email: email });
+      },
+      attachments: function attachments(_, _ref6) {
+        var ids = _ref6.ids;
+
+        return Connectors.getThumbnails(ids);
       }
     },
     Category: {
-      posts(category, args) {
-        return Connectors.getTermPosts(category.term_id, args)
+      posts: function posts(category, args) {
+        return Connectors.getTermPosts(category.term_id, args);
       }
     },
     Post: {
-      layout(post) {
-        return Connectors.getPostLayout(post.id)
+      layout: function layout(post) {
+        return Connectors.getPostLayout(post.id);
       },
-      post_meta(post, keys) {
-        return Connectors.getPostmeta(post.id, keys)
+      post_meta: function post_meta(post, keys) {
+        return Connectors.getPostmeta(post.id, keys);
       },
-      thumbnail(post) {
-        return Connectors.getPostThumbnail(post.id)
+      thumbnail: function thumbnail(post) {
+        return Connectors.getPostThumbnail(post.id);
       },
-      author(post) {
-        return Connectors.getUser({userId: post.post_author})
+      author: function author(post) {
+        return Connectors.getUser({ userId: post.post_author });
       },
-      categories(post) {
-        return Connectors.getPostTerms(post.id)
+      categories: function categories(post) {
+        return Connectors.getPostTerms(post.id);
       }
     },
     Postmeta: {
-      connecting_post(postmeta) {
-        return Connectors.getPost(postmeta.meta_value)
+      connecting_post: function connecting_post(postmeta) {
+        return Connectors.getPost(postmeta.meta_value);
       }
     },
     Menu: {
-      items(menu) {
-        return menu.items
+      items: function items(menu) {
+        return menu.items;
       }
     },
     MenuItem: {
-      navitem(menuItem) {
-        return Connectors.getPost(menuItem.linkedId)
+      navitem: function navitem(menuItem) {
+        return Connectors.getPost(menuItem.linkedId);
       },
-      children(menuItem) {
-        return menuItem.children
+      children: function children(menuItem) {
+        return menuItem.children;
       }
     },
     User: {
-      posts(user, args) {
-        const a = {
-          ...args,
+      posts: function posts(user, args) {
+        var a = _extends({}, args, {
           userId: user.id
-        }
-        return Connectors.getPosts(a)
-      },
+        });
+        return Connectors.getPosts(a);
+      }
     }
-  }
+  };
 
-  return Resolvers
+  return Resolvers;
 }

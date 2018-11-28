@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (Conn, prefix) {
-  return Conn.define(prefix + 'postmeta', {
+  return Conn.define(prefix + 'commentmeta', {
     meta_id: { type: _sequelize2.default.INTEGER, primaryKey: true, field: 'meta_id' },
-    post_id: { type: _sequelize2.default.INTEGER },
+    comment_id: { type: _sequelize2.default.INTEGER },
     meta_key: { type: _sequelize2.default.STRING },
     meta_value: { type: _sequelize2.default.INTEGER }
   });

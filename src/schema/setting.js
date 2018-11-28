@@ -1,8 +1,8 @@
-const Setting = `
-  type Setting {
-    uploads: String
-    amazonS3: Boolean
-  }
-`
+"use strict";
 
-export default Setting
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Setting = "\n  type Setting {\n    uploads: String\n    amazonS3: Boolean\n  }\n";
+
+exports.default = Setting;

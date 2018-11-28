@@ -1,53 +1,44 @@
-export default function (TermRelationships, Post, TermTaxonomy, settings){
-  const {wp_prefix} = settings.privateSettings
+'use strict';
 
-  return function(termId, { post_type, order, limit = 10, skip = 0 }) {
-    const orderBy = order ? [Post, order.orderBy, order.direction] : [Post, 'post_date', 'DESC']
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-    let termIds = [termId]
+exports.default = function (TermRelationships, Post, settings) {
+  var wp_prefix = settings.privateSettings.wp_prefix;
 
-    function getTermIds(parentTermIds) {
-      if (!parentTermIds.length) return termIds
 
-      return TermTaxonomy.findAll({
-        attributes: ['term_taxonomy_id'],
-        include: [],
+  return function (termId, _ref) {
+    var post_type = _ref.post_type,
+        order = _ref.order,
+        _ref$limit = _ref.limit,
+        limit = _ref$limit === undefined ? 10 : _ref$limit,
+        _ref$skip = _ref.skip,
+        skip = _ref$skip === undefined ? 0 : _ref$skip;
+
+    var orderBy = order ? [Post, order.orderBy, order.direction] : [Post, 'post_date', 'DESC'];
+    return TermRelationships.findAll({
+      attributes: [],
+      include: [{
+        model: Post,
         where: {
-          parent: parentTermIds
-        },
-        limit: limit,
-        offset: skip
-      })
-      .then(function (posts) {
-        const p = posts.map(post => post.term_taxonomy_id)
-        termIds.push(...p)
-        return p
-      })
-      .then(getTermIds)
-    }
+          post_type: post_type,
+          post_status: 'publish'
+        }
+      }],
+      where: {
+        term_taxonomy_id: termId
+      },
+      order: [orderBy],
+      limit: limit,
+      offset: skip
+    }).then(function (posts) {
+      var p = (0, _lodash.map)(posts, function (post) {
+        return post[wp_prefix + 'post'];
+      });
+      return p;
+    });
+  };
+};
 
-    return getTermIds([termId])
-      .then((termIds) => {
-        return TermRelationships.findAll({
-          attributes: [],
-          include: [{
-            model: Post,
-            where: {
-              post_type: post_type,
-              post_status: 'publish'
-            }
-          }],
-          where: {
-            term_taxonomy_id: termIds
-          },
-          order: [orderBy],
-          limit: limit,
-          offset: skip
-        })
-      })
-      .then(posts => {
-        const p = posts.map(post => post[`${wp_prefix}post`])
-        return p
-      })
-  }
-}
+var _lodash = require('lodash');

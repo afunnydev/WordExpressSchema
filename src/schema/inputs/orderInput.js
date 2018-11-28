@@ -1,8 +1,8 @@
-const OrderInput = `
-  input OrderInput {
-    orderBy: String,
-    direction: String
-  }
-`
+"use strict";
 
-export default OrderInput
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var OrderInput = "\n  input OrderInput {\n    orderBy: String,\n    direction: String\n  }\n";
+
+exports.default = OrderInput;
