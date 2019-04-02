@@ -12,6 +12,7 @@ function WordExpressResolvers(Connectors, publicSettings) {
     Query: {
       settings: function settings() {
         return publicSettings;
+      }
     },
     Category: {
       posts: function posts(category, args) {
