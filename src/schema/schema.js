@@ -31,7 +31,7 @@ var _orderInput2 = _interopRequireDefault(_orderInput);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Also added an email field - AKIA
-var RootQuery = '\n  type Query {\n    settings: Setting\n    posts(post_type: [String], limit: Int, skip: Int, order: OrderInput, userId: Int): [Post]\n    post(name: String, id: Int): Post\n    attachments(ids: [Int]): [Thumbnail]\n    postmeta(post_id: Int!, keys: [MetaType]): [Postmeta]\n    menus(name: String!): Menu\n    category(term_id: Int, name: String): Category\n    user(name: String, id: Int, email: String): User\n  }\n';
+var RootQuery = '\n  type Query {\n    settings: Setting\n  }\n';
 
 var SchemaDefinition = '\n  schema {\n    query: Query\n    mutation: Mutation\n  }\n';
 

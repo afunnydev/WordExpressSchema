@@ -12,46 +12,6 @@ function WordExpressResolvers(Connectors, publicSettings) {
     Query: {
       settings: function settings() {
         return publicSettings;
-      },
-      category: function category(_, _ref) {
-        var term_id = _ref.term_id,
-            name = _ref.name;
-
-        return Connectors.getTerm(term_id, name);
-      },
-      posts: function posts(_, args) {
-        return Connectors.getPosts(args);
-      },
-      post: function post(_, _ref2) {
-        var name = _ref2.name,
-            id = _ref2.id;
-
-        return Connectors.getPost(id, name);
-      },
-      postmeta: function postmeta(_, _ref3) {
-        var post_id = _ref3.post_id,
-            keys = _ref3.keys;
-
-        return Connectors.getPostmeta(post_id, keys);
-      },
-      menus: function menus(_, _ref4) {
-        var name = _ref4.name;
-
-        return Connectors.getMenu(name);
-      },
-      user: function user(_, _ref5) {
-        // Added email field - AKIA
-        var id = _ref5.id,
-            name = _ref5.name,
-            email = _ref5.email;
-
-        return Connectors.getUser({ id: id, name: name, email: email });
-      },
-      attachments: function attachments(_, _ref6) {
-        var ids = _ref6.ids;
-
-        return Connectors.getThumbnails(ids);
-      }
     },
     Category: {
       posts: function posts(category, args) {
